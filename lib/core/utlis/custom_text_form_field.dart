@@ -1,11 +1,14 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:intern2grow_quote_app/core/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.keyboardType,
     this.enabled=true,
-    this.obscureText = true,
+    this.obscureText = false,
     this.onChanged,
     this.onSaved,
     this.suffixIcon,
@@ -25,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
     return  SizedBox(
       height: 44,
       child:TextFormField(
+        style: AppStyles.stylesRegular14.copyWith(color: const Color(0xff2A2B2E)),
         controller: fieldController,
         keyboardType: keyboardType,
         enabled: enabled,
@@ -34,16 +38,17 @@ class CustomTextFormField extends StatelessWidget {
         validator: validator,
         decoration:  InputDecoration(
           suffixIcon: suffixIcon,
-            border:buildOutlineInputBorder()
+          focusedBorder: buildOutlineInputBorder(color:Colors.black),
+          enabledBorder: buildOutlineInputBorder(),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildOutlineInputBorder() {
-    return const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(color: Color(0xff808194))
+  OutlineInputBorder buildOutlineInputBorder({Color? color=const Color(0xff808194)}) {
+    return  OutlineInputBorder(
+              borderRadius:const BorderRadius.all(Radius.circular(8)),
+              borderSide: BorderSide(color: color!)
           );
   }
 }
